@@ -9,13 +9,13 @@
 //  
 // ------------------------
 
-const findMax = (arr)=>{
+const findMax = (arr) => {
     let max = arr[0];
-    for (let i = 0; i<arr.length ; i++){
-        if (arr[i]> max){
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] > max) {
             max = arr[i]
         }
-    
+
     }
     return max;
 }
@@ -29,17 +29,16 @@ const findMax = (arr)=>{
 //  
 // ------------------------
 
-const sumNums = (arr)=>{
-    let sum = 0; 
-    for (let i = 0; i<arr.length ; i++){
-
-            sum =+ arr[i];
-    
+const sumNums = (arr) => {
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++){
+        if (typeof arr[i] === "number") 
+        { sum += arr[i];
+        }
     }
-  
+
     return sum;
 }
-
 // 3) ---------------------
 // 
 //  using the (reverseArray) function; return provided array reversed
@@ -48,8 +47,8 @@ const sumNums = (arr)=>{
 //  ['C#', 'JS', 'Ruby','Python' ] ==> ['Python','Ruby','JS','C#']
 // 
 // ------------------------
-const reverseArray = (arr)=>{
-  return arr.reverse();
+const reverseArray = (arr) => {
+    return arr.reverse();
 }
 
-module.exports = {findMax , sumNums, reverseArray};
+module.exports = { findMax, sumNums, reverseArray };
