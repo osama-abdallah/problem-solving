@@ -19,8 +19,13 @@
 // ------------------------
 
 const objLat = (obj) => {
-    // write your code here
+    let first = obj.firstName.charAt(0).toUpperCase() + obj.firstName.slice(1);
+    let last = obj.lastName.charAt(0).toUpperCase() + obj.lastName.slice(1);
+
+    let reply = `my name is ${first} ${last} I am ${obj.age} YO, and I love ${obj.hobby}.`
+    return reply;
 };
+
 
 // 2) ---------------------
 //
@@ -83,9 +88,19 @@ const objLat = (obj) => {
 
 // ------------------------
 const cvFormatter = (arr) => {
-    
-    // write your code here
-};
+    let newArr = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].yearsOfExperience > 1 && arr[i].lastName != null) {
+            newArr.push({ fullName: `${arr[i].firstName} ${arr[i].lastName}`, tech: `${arr[i].tech}` })
+
+        } else if (arr[i].yearsOfExperience > 1) {
+            newArr.push({ fullName: `${arr[i].firstName}`, tech: `${arr[i].tech}` })
+        }
+
+    };
+    return newArr
+}
 
 // 3) ---------------------
 //
@@ -108,132 +123,173 @@ const cvFormatter = (arr) => {
 
 // ------------------------
 const applicationsStatics = (arr) => {
-    // write your code here
-};
+    let result = {
+        python_Devs: 0,
+        javaScript_Devs: 0,
+        dotNet_Devs: 0,
+        java_Devs: 0,
+        totalApplicants: 0,
+        rejectedApplicants: 0,
+    }
 
-// 4) ---------------------
-//
-//  A Certain School principal wants to calculate the average score of each class in each grade in the school
-//  so he requested a programmer to solve this issue for him instead of doing it again every time
-//
-//  given the school data, calculate the average score of the students of each class in each grade
-//  then change the avg value for the class
-//  EX:
+    for (let i = 0; i < arr.length; i++) {
+      
+        
+            if (arr[i].tech == "Python") {
+                result.python_Devs += 1;
+                result.totalApplicants+=1;
+            
+            } else if (arr[i].tech == "JS") {
+                result.javaScript_Devs += 1;
+                result.totalApplicants+=1;
+            
+            } else if (arr[i].tech == "Java") {
+                result.java_Devs += 1;
+                result.totalApplicants+=1;
+            
+            } else if (arr[i].tech == ".Net") {
+                result.dotNet_Devs += 1;
+                result.totalApplicants+=1;
 
-let data = {
-    SchoolName: "David Academy",
-    Capacity: 1000,
-    grades: [
-        {
-            grade: "First",
-            numberOFClasses: 3,
-            classes: [
-                {
-                    avg: 0,
-                    classNumber: "01",
-                    classScores: [
-                        89, 87, 45, 48, 89, 65, 21, 54, 78, 62, 51, 54, 50, 49
-                    ]
-                },
-                {
-                    avg: 0,
-                    classNumber: "02",
-                    classScores: [
-                        87, 54, 95, 45, 41, 51, 25, 63, 58, 47, 64, 51, 98, 100
-                    ]
-                },
-                {
-                    avg: 0,
-                    classNumber: "03",
-                    classScores: [
-                        74, 85, 20, 51, 59, 58, 62, 71, 74, 99, 84, 71, 38, 70
-                    ]
-                },
-            ]
-        },
-        {
-            grade: "Second",
-            numberOFClasses: 2,
-            classes: [
-                {
-                    avg: 0,
-                    classNumber: "01",
-                    classScores: [
-                        71, 82, 86, 3, 1, 52, 91, 84, 44, 68, 64, 23, 80, 60,
-                    ]
-                },
-                {
-                    avg: 0,
-                    classNumber: "02",
-                    classScores: [
-                        86, 39, 71, 17, 61, 76, 60, 54, 42, 65, 49, 75, 96, 70
-                    ]
-                },
-            ]
-        },
-        {
-            grade: "Third",
-            numberOFClasses: 2,
-            classes: [
-                {
-                    avg: 0,
-                    classNumber: "01",
-                    classScores: [
-                        11, 12, 28, 78, 57, 3, 54, 72, 14, 19, 88, 74, 68, 58
-                    ]
-                },
-                {
-                    avg: 0,
-                    classNumber: "02",
-                    classScores: [
-                        62, 8, 35, 43, 96, 9, 97, 73, 4, 32, 18, 81, 70, 42
-                    ]
-                },
-            ]
-        },
-        {
-            grade: "Forth",
-            numberOFClasses: 4,
-            classes: [
-                {
-                    avg: 0,
-                    classNumber: "01",
-                    classScores: [
-                        63, 71, 93, 87, 83, 85, 67, 49, 62, 45, 38, 48, 58, 52
-                    ]
-                },
-                {
-                    avg: 0,
-                    classNumber: "02",
-                    classScores: [
-                        100, 45, 70, 75, 87, 63, 39, 46, 54, 68, 74, 96, 52, 49
-                    ]
-                },
-                {
-                    avg: 0,
-                    classNumber: "03",
-                    classScores: [
-                        97, 54, 80, 95, 69, 31, 88, 84, 50, 81, 67, 34, 41, 87
-                    ]
-                },
-                {
-                    avg: 0,
-                    classNumber: "04",
-                    classScores: [
-                        64, 96, 66, 38, 78, 58, 43, 100, 34, 56, 82, 53, 89, 72
-                    ]
-                },
-            ]
-        },
-    ],
-};
+            }
+if(arr[i].yearsOfExperience<1||arr[i].lastName === null||arr[i].firstName === null){
+    result.rejectedApplicants+=1;
+}
 
-//  Note that:
-//  1- This is not the exact data you will be getting every time and the solution should be dynamic
-//  2- You need to round the average to the nearest lower number 
+    }
+return result};
 
-const classesAvg = (data) => {
-    // write your code here
-};
+    // 4) ---------------------
+    //
+    //  A Certain School principal wants to calculate the average score of each class in each grade in the school
+    //  so he requested a programmer to solve this issue for him instead of doing it again every time
+    //
+    //  given the school data, calculate the average score of the students of each class in each grade
+    //  then change the avg value for the class
+    //  EX:
 
-module.exports = { objLat, cvFormatter, applicationsStatics, classesAvg };
+    let data = {
+        SchoolName: "David Academy",
+        Capacity: 1000,
+        grades: [
+            {
+                grade: "First",
+                numberOFClasses: 3,
+                classes: [
+                    {
+                        avg: 0,
+                        classNumber: "01",
+                        classScores: [
+                            89, 87, 45, 48, 89, 65, 21, 54, 78, 62, 51, 54, 50, 49
+                        ]
+                    },
+                    {
+                        avg: 0,
+                        classNumber: "02",
+                        classScores: [
+                            87, 54, 95, 45, 41, 51, 25, 63, 58, 47, 64, 51, 98, 100
+                        ]
+                    },
+                    {
+                        avg: 0,
+                        classNumber: "03",
+                        classScores: [
+                            74, 85, 20, 51, 59, 58, 62, 71, 74, 99, 84, 71, 38, 70
+                        ]
+                    },
+                ]
+            },
+            {
+                grade: "Second",
+                numberOFClasses: 2,
+                classes: [
+                    {
+                        avg: 0,
+                        classNumber: "01",
+                        classScores: [
+                            71, 82, 86, 3, 1, 52, 91, 84, 44, 68, 64, 23, 80, 60,
+                        ]
+                    },
+                    {
+                        avg: 0,
+                        classNumber: "02",
+                        classScores: [
+                            86, 39, 71, 17, 61, 76, 60, 54, 42, 65, 49, 75, 96, 70
+                        ]
+                    },
+                ]
+            },
+            {
+                grade: "Third",
+                numberOFClasses: 2,
+                classes: [
+                    {
+                        avg: 0,
+                        classNumber: "01",
+                        classScores: [
+                            11, 12, 28, 78, 57, 3, 54, 72, 14, 19, 88, 74, 68, 58
+                        ]
+                    },
+                    {
+                        avg: 0,
+                        classNumber: "02",
+                        classScores: [
+                            62, 8, 35, 43, 96, 9, 97, 73, 4, 32, 18, 81, 70, 42
+                        ]
+                    },
+                ]
+            },
+            {
+                grade: "Forth",
+                numberOFClasses: 4,
+                classes: [
+                    {
+                        avg: 0,
+                        classNumber: "01",
+                        classScores: [
+                            63, 71, 93, 87, 83, 85, 67, 49, 62, 45, 38, 48, 58, 52
+                        ]
+                    },
+                    {
+                        avg: 0,
+                        classNumber: "02",
+                        classScores: [
+                            100, 45, 70, 75, 87, 63, 39, 46, 54, 68, 74, 96, 52, 49
+                        ]
+                    },
+                    {
+                        avg: 0,
+                        classNumber: "03",
+                        classScores: [
+                            97, 54, 80, 95, 69, 31, 88, 84, 50, 81, 67, 34, 41, 87
+                        ]
+                    },
+                    {
+                        avg: 0,
+                        classNumber: "04",
+                        classScores: [
+                            64, 96, 66, 38, 78, 58, 43, 100, 34, 56, 82, 53, 89, 72
+                        ]
+                    },
+                ]
+            },
+        ],
+    };
+
+    //  Note that:
+    //  1- This is not the exact data you will be getting every time and the solution should be dynamic
+    //  2- You need to round the average to the nearest lower number 
+
+    const classesAvg = (data) => {
+        for (let i =0;i<data.grades.length;i++){
+        for (let j=0; j<data.grades[i].classes.length;j++){
+let sum=0;        
+            for (let x=0;x<data.grades[i].classes[j].classScores.length;x++){
+           sum+=data.grades[i].classes[j].classScores[x];
+        }
+let avg=(sum/data.grades[i].classes[j].classScores.length);
+data.grades[i].classes[j].avg = Math.floor(avg) ;        }
+        }
+    return data};
+
+    module.exports = { objLat, cvFormatter, applicationsStatics, classesAvg };
