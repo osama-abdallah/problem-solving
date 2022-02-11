@@ -36,7 +36,6 @@ const sumNums = (arr) => {
         { sum += arr[i];
         }
     }
-
     return sum;
 }
 // 3) ---------------------
